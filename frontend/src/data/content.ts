@@ -20,13 +20,23 @@ export const steps = [
 ];
 
 export const courseCards = [
-  { title: 'Program-specific', examples: 'Leadership, Delivery, Enablement', image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Industry-specific', examples: 'FinTech, Health, Retail', image: 'https://images.unsplash.com/photo-1517048676731-3b8f4f8a4e38?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Topic-specific', examples: 'Agility, Growth, Change', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Level-specific', examples: 'New Managers, Senior Leads', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80' }
+  { title: 'Program Specific', examples: 'Leadership, Delivery, Enablement', image: 'imagehuman.png' },
+  { title: 'Industry Specific', examples: 'Technology, Finance, Healthcare', image: 'imagehuman.png' },
+  { title: 'Topic Specific', examples: 'Agility, Growth, Innovation', image: 'imagehuman.png' },
+  { title: 'Level Specific', examples: 'Senior Leads, Managers, Emerging Talent', image: 'imagehuman.png' }
 ];
 
-export const domains = ['Operations', 'Finance', 'Technology', 'People', 'Product', 'Marketing', 'Sales', 'Strategy', 'Customer Experience'];
+export const domains = [
+  'Operations',
+  'Finance',
+  'Technology',
+  'People & Culture',
+  'Product Strategy',
+  'Marketing & Growth',
+  'Sales Excellence',
+  'Strategic Planning',
+  'Customer Success'
+];
 
 export const frameworkSteps = [
   { title: 'Observe', description: 'We diagnose the current working patterns and identify the highest-value friction points.' },
@@ -35,10 +45,34 @@ export const frameworkSteps = [
 ];
 
 export const highlights = [
-  { title: 'Tailored design', description: 'Every journey is shaped around the audience and the business objective.' },
-  { title: 'Proven model', description: 'A structured framework keeps learning practical and easy to follow.' },
-  { title: 'Flexible delivery', description: 'Support works across live, hybrid, and self-paced environments.' },
-  { title: 'Expert guidance', description: 'Participants can engage with practitioners who understand the work.' },
-  { title: 'Breadth of options', description: 'Programs can span multiple topics while staying coherent and connected.' },
-  { title: 'Measureable outcomes', description: 'Progress is tracked so transformation remains visible and actionable.' }
+  { icon: '🎯', title: 'Tailored Solutions', description: 'Programs customized to your organization\'s goals and challenges.' },
+  { icon: '💡', title: 'Innovative Framework', description: 'Proprietary methods for impactful, application-driven results.' },
+  { icon: '📚', title: 'Diverse Offerings', description: 'Courses across industries, skill levels, and emerging fields.' },
+  { icon: '📱', title: 'Flexible Delivery', description: 'Online and offline options tailored to your needs.' },
+  { icon: '👨‍🏫', title: 'Expert Guidance', description: 'Learn from industry leaders with real-world success.' },
+  { icon: '🚀', title: 'Advanced Technology', description: 'State-of-the-art LMS for seamless learning experiences.' },
+  { icon: '📈', title: 'Proven Impact', description: 'Trusted by leading organizations for measurable ROI.' }
+];
+
+export const audienceSegments = [
+  {
+    icon: '💻',
+    title: 'Tech Professionals',
+    description: 'Enhance expertise, embrace tech, drive innovation.'
+  },
+  {
+    icon: '👔',
+    title: 'Non-Tech Professionals',
+    description: 'Adapt digitally, collaborate in tech environments.'
+  },
+  {
+    icon: '🎓',
+    title: 'Emerging Professionals',
+    description: 'Develop powerful skills for rapid career growth.'
+  },
+  {
+    icon: '🏆',
+    title: 'Senior Professionals',
+    description: 'Strengthen leadership, enhance strategic decisions.'
+  }
 ];
