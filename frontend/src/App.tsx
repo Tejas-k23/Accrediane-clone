@@ -11,14 +11,17 @@ import { FaqSection } from './components/FaqSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
+import { AdminModal } from './components/AdminModal';
 
-const api = axios.create({ baseURL: 'http://localhost:5000/api' });
+const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+const api = axios.create({ baseURL: API_BASE });
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [faqItems, setFaqItems] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const [enquireModalOpen, setEnquireModalOpen] = useState(false);
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +53,9 @@ export default function App() {
   const handleOpenEnquire = () => setEnquireModalOpen(true);
   const handleCloseEnquire = () => setEnquireModalOpen(false);
 
+  const handleOpenAdmin = () => setAdminModalOpen(true);
+  const handleCloseAdmin = () => setAdminModalOpen(false);
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
       <Navbar activeSection={activeSection} onOpenEnquire={handleOpenEnquire} />
@@ -65,9 +71,11 @@ export default function App() {
         <TestimonialsSection testimonials={testimonials} onOpenEnquire={handleOpenEnquire} />
       </main>
 
-      <Footer onOpenEnquire={handleOpenEnquire} />
+      <Footer onOpenEnquire={handleOpenEnquire} onOpenAdmin={handleOpenAdmin} />
 
       <EnquireModal isOpen={enquireModalOpen} onClose={handleCloseEnquire} />
+      <AdminModal isOpen={adminModalOpen} onClose={handleCloseAdmin} />
     </div>
   );
 }
+

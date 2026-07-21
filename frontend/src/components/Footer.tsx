@@ -2,9 +2,10 @@ import React from 'react';
 
 interface FooterProps {
   onOpenEnquire?: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenEnquire }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenEnquire, onOpenAdmin }) => {
   return (
     <footer style={{ background: '#ffffff', color: '#475569', paddingTop: '3.5rem', paddingBottom: '2.5rem' }}>
       <div className="container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -156,14 +157,42 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquire }) => {
         {/* Bottom Horizontal Line */}
         <div style={{ borderTop: '1px solid #cbd5e1', width: '100%', marginBottom: '1.75rem' }} />
 
-        {/* Bottom Internship Task Credit */}
-        <div style={{ textAlign: 'center', fontSize: '0.875rem', color: '#475569', fontWeight: 500 }}>
-          © 2026 Developed by Tejas Kumbharkar as an Internship Task
+        {/* Bottom Internship Task Credit & Admin Link */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontSize: '0.875rem', color: '#475569', fontWeight: 500 }}>
+          <div>
+            © 2026 Developed by Tejas Kumbharkar as an Internship Task
+          </div>
+
+          <button
+            onClick={onOpenAdmin}
+            style={{
+              background: '#f1f5f9',
+              border: '1px solid #cbd5e1',
+              color: '#334155',
+              padding: '0.35rem 0.85rem',
+              borderRadius: '0.5rem',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#e2e8f0';
+              e.currentTarget.style.color = '#1d6bf3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f1f5f9';
+              e.currentTarget.style.color = '#334155';
+            }}
+          >
+            <span>Admin Portal</span> 🔒
+          </button>
         </div>
 
       </div>
     </footer>
   );
 };
-
-

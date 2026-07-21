@@ -8,6 +8,8 @@ interface EnquireModalProps {
   onClose: () => void;
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+
 export const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -27,7 +29,7 @@ export const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) =
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:5000/api/leads', formData);
+      await axios.post(`${API_BASE}/leads`, formData);
       setSubmitted(true);
     } catch (err) {
       setSubmitted(true);
