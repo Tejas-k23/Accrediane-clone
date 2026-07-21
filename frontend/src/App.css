@@ -1,0 +1,17 @@
+.hide-mobile {
+  display: block;
+}
+
+.hide-desktop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .hide-mobile {
+    display: none;
+  }
+
+  .hide-desktop {
+    display: inline-flex;
+  }
+}
