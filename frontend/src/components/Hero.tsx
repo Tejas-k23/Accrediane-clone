@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
 
 interface HeroProps {
   onOpenEnquire: () => void;
@@ -45,8 +44,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEnquire }) => {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <h1
               style={{
-                fontSize: 'clamp(2.3rem, 4.2vw, 3.6rem)',
-                fontWeight: 800,
+                fontSize: 'clamp(2.1rem, 3.8vw, 3.1rem)',
+                fontWeight: 700,
                 lineHeight: 1.15,
                 color: '#000000',
                 marginBottom: '1.25rem',
@@ -82,16 +81,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEnquire }) => {
                 marginBottom: '2.5rem'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
-                <CheckCircle size={20} color="#16a34a" fill="#16a34a" style={{ color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check text-green-600" style={{ flexShrink: 0 }}>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
                 <span>Tailored Solutions</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
-                <CheckCircle size={20} color="#16a34a" fill="#16a34a" style={{ color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check text-green-600" style={{ flexShrink: 0 }}>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
                 <span>Industry Insights</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
-                <CheckCircle size={20} color="#16a34a" fill="#16a34a" style={{ color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check text-green-600" style={{ flexShrink: 0 }}>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
                 <span>Expert Guidance</span>
               </div>
             </div>

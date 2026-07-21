@@ -69,14 +69,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
-          style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', textDecoration: 'none' }}
         >
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.65rem', color: '#1d6bf3', lineHeight: 1, letterSpacing: '-0.02em' }}>
-            accredian
-          </span>
-          <span style={{ fontSize: '0.65rem', fontWeight: 600, color: '#64748b', letterSpacing: '0.02em', marginTop: '3px' }}>
-            credentials that matter
-          </span>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAz1BMVEVHcEwFVpwDZZ8HZJwBZqIEZaEUaJkIYpsNssoFrdMLstoOOW0POXAJaZ4DZ54IaJwMrdUCrtcJqNcMOm8LO3EOPGoDZJwnXGcGp9IFbKPA5GYGrdoLOW3b/WvE720GpNwGr9oFDWLA6m4NO28HrNgLNW4JW5gRJWEMI2XL7nHP9GgFMnAFq9YEIGUDqdgBaJ/E5nPe71YBZ6IPOGEBZ6QJrtQPO3DG73IONmiXyIbB7W9Kv78ErdUOOnIJS4O85n7g+1kFhrnA7mq11G256XfYa13XAAAARXRSTlMAPJ4ki/8ybwq3HUuhE9pdFf8/ef40ugSMR0frZy2dKnIl+evjW1MKHSZij50+//eSE8IR7lu/edi0uK3Jr5tQC8XSJVYbAJz5AAAB7UlEQVR4AX3SBXbqQABA0Qdk4p4JaSAUJ8Fpceqy/y19gVOXu4bLJ6VyhV8pQq1oFd0w+cqyHdehgic0Pwj5IpIyriZnAU6aUIOIV2bdjCMcsqhx3mzRrgRhp9Hu8srvmVF/ILy8GI6KcVcy0RttCt7LqZRVZAaZtBgIVU4nE154oi9rNVozsCIAb54yOjvjhZPm/dGCcAJWxslFh0EJTvIIb8BJwonEXBIDmKE1XooVR4nuc7LWNdXaABgB59tSCQB9ZwRifwH4QQu6EiDx88MCwjWURJyGpcVVEzD7trWZArDc5G247rEOVABmLYA4y3OlCnAjkZscSCcc5fMKTHPGN6kGFHKMLYHkJuNoWQakTY2jHG6iDEAonOxiSFA7zcAHmJezAiDRbgFI1nWAaDw0r3UAJ55uhwBjeQewPDOAQt6UBEdd2T7cTXQg6RTLsDEQAEnW1T2ONjfQDJrAPeJhtn/kpKCqAJDlZcGrkCMnDwNTXHJSFhS8s8woi/Rax+GVXPKKWOaD6tM9H9KhiQFkQNOAbAydZ1759SbpZQVLSotwlhD3Ez4YOPejTLKJYrZb0gq7rpryjhhsF1O7kpBNn7YIlziuunz0BGJFFI/HaB7faPZ0RcNRMtld8p1m3WcdePOiH+f8RG/x2V/VDy8B6rMJywAAAABJRU5ErkJggg=="
+            alt="Accredian logo icon"
+            style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.65rem', color: '#1d6bf3', lineHeight: 1, letterSpacing: '-0.02em' }}>
+              accredian
+            </span>
+            <span style={{ fontSize: '0.65rem', fontWeight: 600, color: '#64748b', letterSpacing: '0.02em', marginTop: '3px' }}>
+              credentials that matter
+            </span>
+          </div>
         </a>
 
         {/* Desktop Nav Items */}

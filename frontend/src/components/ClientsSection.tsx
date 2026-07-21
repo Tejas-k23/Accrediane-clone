@@ -7,8 +7,8 @@ export const ClientsSection: React.FC = () => {
     { name: 'HCL', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/hcl.png' },
     { name: 'IBM', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/ibm.png' },
     { name: 'CRIF', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/crif.png' },
-    { name: 'ADP', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/adp.svg' },
-    { name: 'BAYER', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/bayer.svg' }
+    { name: 'ADP', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/adp.png' },
+    { name: 'BAYER', src: 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/bayer.png' }
   ];
 
   return (
@@ -39,11 +39,11 @@ export const ClientsSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Company Logos Grid */}
+        {/* Company Logos Grid with larger minmax width */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
             gap: '2.5rem',
             alignItems: 'center',
             justifyItems: 'center',
@@ -70,8 +70,8 @@ export const ClientsSection: React.FC = () => {
                 src={client.src}
                 alt={client.name}
                 style={{
-                  maxHeight: '55px',
-                  maxWidth: '130px',
+                  maxHeight: '68px',
+                  maxWidth: '160px',
                   width: 'auto',
                   height: 'auto',
                   objectFit: 'contain',

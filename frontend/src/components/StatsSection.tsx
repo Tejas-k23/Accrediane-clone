@@ -1,18 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+
+const Counter: React.FC<{ target: number; suffix: string; duration?: number }> = ({ target, suffix, duration = 1200 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const end = target;
+    if (start === end) return;
+
+    const totalMiliseconds = duration;
+    const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 20);
+    
+    const timer = setInterval(() => {
+      start += Math.ceil(end / (totalMiliseconds / incrementTime));
+      if (start >= end) {
+        clearInterval(timer);
+        setCount(end);
+      } else {
+        setCount(start);
+      }
+    }, incrementTime);
+
+    return () => clearInterval(timer);
+  }, [target, duration]);
+
+  return <>{count}{suffix}</>;
+};
 
 export const StatsSection: React.FC = () => {
   const statItems = [
     {
-      value: '10K+',
+      target: 10,
+      suffix: 'K+',
       desc: 'Professionals Trained For Exceptional Career Success'
     },
     {
-      value: '200+',
+      target: 200,
+      suffix: '+',
       desc: 'Sessions Delivered With Unmatched Learning Excellence'
     },
     {
-      value: '5K+',
+      target: 5,
+      suffix: 'K+',
       desc: 'Active Learners Engaged In Dynamic Courses'
     }
   ];
@@ -89,7 +119,7 @@ export const StatsSection: React.FC = () => {
                   boxShadow: '0 4px 14px rgba(29, 107, 243, 0.12)'
                 }}
               >
-                {item.value}
+                <Counter target={item.target} suffix={item.suffix} />
               </div>
 
               {/* Description Text */}

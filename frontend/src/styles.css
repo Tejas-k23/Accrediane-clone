@@ -213,9 +213,19 @@ button {
     padding: 2.5rem 1.5rem 0 !important;
     gap: 2rem !important;
   }
-  .target-audience-grid {
+@media (max-width: 768px) {
+  .enquire-modal-card {
     grid-template-columns: 1fr !important;
-    gap: 1.75rem !important;
+    max-width: 92vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  .hide-mobile {
+    display: none !important;
+  }
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 

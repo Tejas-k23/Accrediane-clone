@@ -128,50 +128,15 @@ export const EdgeSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* 7 Domain Cards Layout (3 Top, 3 Middle, 1 Centered Bottom) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {/* Top 6 Cards in 3 Columns */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            {domains.slice(0, 6).map((domain, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                whileHover={{ y: -5, boxShadow: '0 15px 30px -5px rgba(29, 107, 243, 0.12)' }}
-                style={{
-                  background: '#ffffff',
-                  borderRadius: '1.25rem',
-                  padding: '2.25rem 1.5rem',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 6px 18px rgba(0, 0, 0, 0.04)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  gap: '1.25rem',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {domain.icon}
-                </div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0f172a' }}>
-                  {domain.title}
-                </h3>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Centered 7th Card (Fintech Innovation Lab) */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {/* 7 Domain Cards Layout in a Single Responsive CSS Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+          {domains.map((domain, idx) => (
             <motion.div
+              key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.5 }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
               whileHover={{ y: -5, boxShadow: '0 15px 30px -5px rgba(29, 107, 243, 0.12)' }}
               style={{
                 background: '#ffffff',
@@ -185,19 +150,17 @@ export const EdgeSection: React.FC = () => {
                 justifyContent: 'center',
                 textAlign: 'center',
                 gap: '1.25rem',
-                width: '100%',
-                maxWidth: '380px',
                 transition: 'all 0.3s ease'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {domains[6].icon}
+                {domain.icon}
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0f172a' }}>
-                {domains[6].title}
+                {domain.title}
               </h3>
             </motion.div>
-          </div>
+          ))}
         </div>
 
         {/* Tailored Course Segmentation Component (Under Domain Expertise) */}

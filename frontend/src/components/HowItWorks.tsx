@@ -54,8 +54,8 @@ export const HowItWorks: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* 3 Step Cards Grid matching image */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        {/* 3 Step Cards Grid matching attached reference image */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', padding: '0 0.5rem' }}>
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
@@ -63,14 +63,14 @@ export const HowItWorks: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              whileHover={{ y: -6, boxShadow: '0 16px 35px -5px rgba(29, 107, 243, 0.15)' }}
+              whileHover={{ y: -6, boxShadow: '0 16px 35px -5px rgba(29, 107, 243, 0.18)' }}
               style={{
                 background: 'linear-gradient(180deg, #f3f8ff 0%, #ebf4ff 100%)',
                 borderRadius: '1.25rem',
-                padding: '2.5rem 2rem',
-                border: '1px solid #dbeafe',
+                padding: '2.5rem 1.75rem 2.25rem',
+                border: '1px solid #bfdbfe',
                 position: 'relative',
-                overflow: 'hidden',
+                overflow: 'visible',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -79,16 +79,31 @@ export const HowItWorks: React.FC = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              {/* Vertical Blue Accent Bar on Left Edge */}
+              {/* Left Vertical Blue Accent Bar */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '18px',
-                  bottom: '18px',
-                  left: 0,
+                  left: '-6px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
                   width: '6px',
+                  height: '110px',
                   background: '#1d6bf3',
-                  borderRadius: '0 4px 4px 0'
+                  borderRadius: '4px'
+                }}
+              />
+
+              {/* Right Vertical Blue Accent Bar */}
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '-6px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '6px',
+                  height: '110px',
+                  background: '#1d6bf3',
+                  borderRadius: '4px'
                 }}
               />
 
@@ -96,18 +111,19 @@ export const HowItWorks: React.FC = () => {
               <div
                 style={{
                   position: 'absolute',
-                  top: '20px',
-                  left: '20px',
-                  width: '32px',
-                  height: '32px',
+                  top: '24px',
+                  left: '14px',
+                  transform: 'translateY(-50%)',
+                  width: '26px',
+                  height: '26px',
                   borderRadius: '50%',
-                  border: '1.5px solid #bfdbfe',
+                  border: '2px solid #bfdbfe',
                   background: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '0.9rem',
-                  fontWeight: 800,
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
                   color: '#0f172a',
                   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
                 }}
@@ -118,15 +134,15 @@ export const HowItWorks: React.FC = () => {
               {/* Center Blue Circle Icon */}
               <div
                 style={{
-                  width: '72px',
-                  height: '72px',
+                  width: '64px',
+                  height: '64px',
                   borderRadius: '50%',
                   background: '#1d6bf3',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginTop: '0.5rem',
-                  marginBottom: '1.75rem',
+                  marginBottom: '1.5rem',
                   boxShadow: '0 8px 20px rgba(29, 107, 243, 0.28)'
                 }}
               >
@@ -134,16 +150,17 @@ export const HowItWorks: React.FC = () => {
               </div>
 
               {/* Card Title & Description */}
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.65rem' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.65rem' }}>
                 {step.title}
               </h3>
 
-              <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: 1.6, maxWidth: '280px' }}>
+              <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.55, maxWidth: '260px' }}>
                 {step.desc}
               </p>
             </motion.div>
           ))}
         </div>
+
 
       </div>
     </section>

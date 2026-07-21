@@ -7,7 +7,6 @@ import { ClientsSection } from './components/ClientsSection';
 import { EdgeSection } from './components/EdgeSection';
 import { CatSection } from './components/CatSection';
 import { HowItWorks } from './components/HowItWorks';
-import { DomainsSection } from './components/DomainsSection';
 import { FaqSection } from './components/FaqSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
@@ -62,12 +61,11 @@ export default function App() {
         <EdgeSection />
         <CatSection />
         <HowItWorks />
-        <DomainsSection onOpenEnquire={handleOpenEnquire} />
-        <FaqSection faqItems={faqItems} />
-        <TestimonialsSection testimonials={testimonials} />
+        <FaqSection faqItems={faqItems} onOpenEnquire={handleOpenEnquire} />
+        <TestimonialsSection testimonials={testimonials} onOpenEnquire={handleOpenEnquire} />
       </main>
 
-      <Footer />
+      <Footer onOpenEnquire={handleOpenEnquire} />
 
       <EnquireModal isOpen={enquireModalOpen} onClose={handleCloseEnquire} />
     </div>
