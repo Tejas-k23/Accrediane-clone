@@ -34,46 +34,14 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
         setLeads(res.data.leads);
       }
     } catch (err: any) {
-      console.warn('Backend connection failed, using dummy fallback leads:', err);
-      // Fallback dummy data if backend is offline
-      setLeads([
-        {
-          _id: 'dummy_1',
-          name: 'Rahul Sharma',
-          email: 'rahul.sharma@techcorp.com',
-          phone: '+91 98765 43210',
-          companyName: 'TechCorp Solutions',
-          domain: 'Gen-AI & Data Engineering',
-          numberOfCandidates: '25-50',
-          modeOfDelivery: 'Hybrid (Live + Self-Paced)',
-          location: 'Bengaluru, Karnataka',
-          createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
-        },
-        {
-          _id: 'dummy_2',
-          name: 'Priya Verma',
-          email: 'priya.v@analyticsglobal.in',
-          phone: '+91 98123 45678',
-          companyName: 'Analytics Global',
-          domain: 'Product Strategy & Innovation',
-          numberOfCandidates: '10-25',
-          modeOfDelivery: 'Virtual Live Classroom',
-          location: 'Gurugram, Haryana',
-          createdAt: new Date(Date.now() - 3600000 * 12).toISOString()
-        },
-        {
-          _id: 'dummy_3',
-          name: 'Ankit Patel',
-          email: 'ankit@fintechplus.io',
-          phone: '+91 97654 32109',
-          companyName: 'Fintech Plus Labs',
-          domain: 'Fintech Innovation',
-          numberOfCandidates: '50+',
-          modeOfDelivery: 'On-Premise Corporate Workshop',
-          location: 'Mumbai, Maharashtra',
-          createdAt: new Date(Date.now() - 3600000 * 3).toISOString()
-        }
-      ]);
+      if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+        console.warn('Admin session expired or invalid token. Clearing saved token.');
+        localStorage.removeItem('adminToken');
+        setToken(null);
+        setLoginError('Admin session expired. Please log in again.');
+      } else {
+        console.warn('Backend connection warning, displaying cached leads:', err);
+      }
     } finally {
       setLeadsLoading(false);
     }
