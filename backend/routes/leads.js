@@ -47,19 +47,21 @@ let memoryLeads = [
   }
 ];
 
+const connectDB = require('../db');
+
 // POST /api/leads - Create new lead enquiry
 router.post('/', async (req, res) => {
   const name = req.body?.name;
   const email = req.body?.email;
   const phone = req.body?.phone;
-  const companyName = req.body?.companyName || req.body?.company;
-  const domain = req.body?.domain;
-  const numberOfCandidates = req.body?.numberOfCandidates || req.body?.candidates;
-  const modeOfDelivery = req.body?.modeOfDelivery || req.body?.deliveryMode;
-  const location = req.body?.location;
+  const companyName = req.body?.companyName || req.body?.company || 'Individual / Not Specified';
+  const domain = req.body?.domain || 'General Corporate Upskilling';
+  const numberOfCandidates = req.body?.numberOfCandidates || req.body?.candidates || '1-10 Candidates';
+  const modeOfDelivery = req.body?.modeOfDelivery || req.body?.deliveryMode || 'Live Virtual Online';
+  const location = req.body?.location || 'India';
 
-  if (!name || !email || !phone || !companyName || !domain || !numberOfCandidates || !modeOfDelivery || !location) {
-    return res.status(400).json({ success: false, message: 'Please complete all fields.' });
+  if (!name || !email || !phone) {
+    return res.status(400).json({ success: false, message: 'Name, email, and phone number are required.' });
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -78,40 +80,33 @@ router.post('/', async (req, res) => {
   };
 
   try {
-    let savedLead;
-    if (mongoose.connection.readyState === 1) {
-      const newLead = new Lead(leadData);
-      savedLead = await newLead.save();
-    } else {
-      savedLead = {
-        _id: `mem_${Date.now()}`,
-        id: Date.now(),
-        ...leadData,
-        createdAt: new Date().toISOString()
-      };
-      memoryLeads.unshift(savedLead);
-    }
-
+    await connectDB();
+    const newLead = new Lead(leadData);
+    const savedLead = await newLead.save();
+    console.log('Successfully saved enquiry to MongoDB:', savedLead._id);
     return res.status(201).json({ success: true, message: 'Enquiry submitted successfully.', lead: savedLead });
   } catch (err) {
-    console.error('Lead Save Error:', err);
-    return res.status(500).json({ success: false, message: 'Internal server error while saving lead.' });
+    console.warn('MongoDB save warning, storing in memory fallback:', err.message);
+    const savedLead = {
+      _id: `mem_${Date.now()}`,
+      id: Date.now(),
+      ...leadData,
+      createdAt: new Date().toISOString()
+    };
+    memoryLeads.unshift(savedLead);
+    return res.status(201).json({ success: true, message: 'Enquiry submitted successfully.', lead: savedLead });
   }
 });
 
 // GET /api/leads - Retrieve all received leads (Requires Admin Token)
 router.get('/', verifyAdminToken, async (req, res) => {
   try {
-    let allLeads = [];
-    if (mongoose.connection.readyState === 1) {
-      allLeads = await Lead.find().sort({ createdAt: -1 });
-    } else {
-      allLeads = memoryLeads;
-    }
-
+    await connectDB();
+    const mongoLeads = await Lead.find().sort({ createdAt: -1 });
+    const allLeads = mongoLeads.length > 0 ? mongoLeads : memoryLeads;
     return res.json({ success: true, count: allLeads.length, leads: allLeads });
   } catch (err) {
-    console.error('Fetch Leads Error:', err);
+    console.error('Fetch Leads Error:', err.message);
     return res.json({ success: true, count: memoryLeads.length, leads: memoryLeads });
   }
 });

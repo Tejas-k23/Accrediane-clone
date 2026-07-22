@@ -5,11 +5,11 @@ const LeadSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
-    companyName: { type: String, required: true },
-    domain: { type: String, required: true },
-    numberOfCandidates: { type: String, required: true },
-    modeOfDelivery: { type: String, required: true },
-    location: { type: String, required: true },
+    companyName: { type: String, default: 'Individual / Not Specified' },
+    domain: { type: String, default: 'General Corporate Upskilling' },
+    numberOfCandidates: { type: String, default: '1-10 Candidates' },
+    modeOfDelivery: { type: String, default: 'Live Virtual Online' },
+    location: { type: String, default: 'India' },
     createdAt: { type: Date, default: Date.now }
   },
   { timestamps: true }
