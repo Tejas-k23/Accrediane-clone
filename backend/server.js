@@ -39,18 +39,42 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(express.json());
 
+// Configure DNS servers fallback for mongodb+srv DNS resolution on Windows/Node environments
+const dns = require('dns');
+if (process.env.MONGO_URI && process.env.MONGO_URI.startsWith('mongodb+srv://')) {
+  try {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+  } catch (dnsErr) {
+    console.warn('Custom DNS setServers warning:', dnsErr.message);
+  }
+}
+
 // Connect to MongoDB database
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/accredian';
 mongoose
-  .connect(mongoURI)
+  .connect(mongoURI, {
+    serverSelectionTimeoutMS: 8000
+  })
   .then(() => console.log('Successfully connected to MongoDB database.'))
   .catch((err) => {
     console.warn('MongoDB connection warning:', err.message);
     console.warn('Backend running with in-memory & dummy data fallbacks.');
   });
 
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB Mongoose connection active.');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB Mongoose error:', err.message);
+});
+
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', dbStatus: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
+  res.json({
+    status: 'ok',
+    dbStatus: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    mongoHost: mongoose.connection.host || null
+  });
 });
 
 app.use('/api/admin', require('./routes/admin').router);

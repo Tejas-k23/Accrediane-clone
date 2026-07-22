@@ -12,8 +12,8 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 import { EnquireModal } from './components/EnquireModal';
 import { AdminModal } from './components/AdminModal';
+import { API_BASE } from './config';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
 const api = axios.create({ baseURL: API_BASE });
 
 export default function App() {

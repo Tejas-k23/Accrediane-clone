@@ -49,7 +49,14 @@ let memoryLeads = [
 
 // POST /api/leads - Create new lead enquiry
 router.post('/', async (req, res) => {
-  const { name, email, phone, companyName, domain, numberOfCandidates, modeOfDelivery, location } = req.body || {};
+  const name = req.body?.name;
+  const email = req.body?.email;
+  const phone = req.body?.phone;
+  const companyName = req.body?.companyName || req.body?.company;
+  const domain = req.body?.domain;
+  const numberOfCandidates = req.body?.numberOfCandidates || req.body?.candidates;
+  const modeOfDelivery = req.body?.modeOfDelivery || req.body?.deliveryMode;
+  const location = req.body?.location;
 
   if (!name || !email || !phone || !companyName || !domain || !numberOfCandidates || !modeOfDelivery || !location) {
     return res.status(400).json({ success: false, message: 'Please complete all fields.' });
@@ -59,13 +66,29 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
   }
 
+  const leadData = {
+    name,
+    email,
+    phone,
+    companyName,
+    domain,
+    numberOfCandidates,
+    modeOfDelivery,
+    location
+  };
+
   try {
     let savedLead;
     if (mongoose.connection.readyState === 1) {
-      const newLead = new Lead(req.body);
+      const newLead = new Lead(leadData);
       savedLead = await newLead.save();
     } else {
-      savedLead = { _id: `mem_${Date.now()}`, id: Date.now(), ...req.body, createdAt: new Date().toISOString() };
+      savedLead = {
+        _id: `mem_${Date.now()}`,
+        id: Date.now(),
+        ...leadData,
+        createdAt: new Date().toISOString()
+      };
       memoryLeads.unshift(savedLead);
     }
 
@@ -82,9 +105,6 @@ router.get('/', verifyAdminToken, async (req, res) => {
     let allLeads = [];
     if (mongoose.connection.readyState === 1) {
       allLeads = await Lead.find().sort({ createdAt: -1 });
-      if (allLeads.length === 0) {
-        allLeads = memoryLeads;
-      }
     } else {
       allLeads = memoryLeads;
     }

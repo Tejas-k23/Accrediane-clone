@@ -8,31 +8,55 @@ interface EnquireModalProps {
   onClose: () => void;
 }
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+import { API_BASE } from '../config';
 
 export const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    companyName: '',
     company: '',
     domain: '',
+    numberOfCandidates: '',
     candidates: '',
+    modeOfDelivery: '',
     deliveryMode: '',
     location: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage('');
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      companyName: formData.companyName || formData.company,
+      company: formData.companyName || formData.company,
+      domain: formData.domain,
+      numberOfCandidates: formData.numberOfCandidates || formData.candidates,
+      candidates: formData.numberOfCandidates || formData.candidates,
+      modeOfDelivery: formData.modeOfDelivery || formData.deliveryMode,
+      deliveryMode: formData.modeOfDelivery || formData.deliveryMode,
+      location: formData.location
+    };
 
     try {
-      await axios.post(`${API_BASE}/leads`, formData);
-      setSubmitted(true);
-    } catch (err) {
-      setSubmitted(true);
+      const res = await axios.post(`${API_BASE}/leads`, payload);
+      if (res.data && res.data.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(res.data?.message || 'Failed to submit enquiry. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('Enquiry submission error:', err);
+      setErrorMessage(err.response?.data?.message || 'Server connection error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -40,13 +64,17 @@ export const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) =
 
   const resetAndClose = () => {
     setSubmitted(false);
+    setErrorMessage('');
     setFormData({
       name: '',
       email: '',
       phone: '',
+      companyName: '',
       company: '',
       domain: '',
+      numberOfCandidates: '',
       candidates: '',
+      modeOfDelivery: '',
       deliveryMode: '',
       location: ''
     });
@@ -132,6 +160,22 @@ export const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) =
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)' }}>
                     Enquire Now
                   </h3>
+
+                  {errorMessage && (
+                    <div
+                      style={{
+                        background: '#fef2f2',
+                        border: '1px solid #fecaca',
+                        color: '#ef4444',
+                        padding: '0.65rem 0.85rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '0.85rem',
+                        marginBottom: '1rem'
+                      }}
+                    >
+                      {errorMessage}
+                    </div>
+                  )}
 
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                     {/* Enter Name */}

@@ -8,7 +8,7 @@ interface AdminModalProps {
   onClose: () => void;
 }
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+import { API_BASE } from '../config';
 const api = axios.create({ baseURL: API_BASE });
 
 export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
@@ -127,9 +127,10 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
 
   const filteredLeads = leads.filter(lead => {
     const q = searchQuery.toLowerCase();
+    const company = lead.companyName || lead.company || '';
     return (
       lead.name?.toLowerCase().includes(q) ||
-      lead.companyName?.toLowerCase().includes(q) ||
+      company.toLowerCase().includes(q) ||
       lead.email?.toLowerCase().includes(q) ||
       lead.domain?.toLowerCase().includes(q) ||
       lead.location?.toLowerCase().includes(q)
@@ -420,7 +421,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
                   </div>
                   <div>
                     <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a' }}>
-                      {new Set(leads.map(l => l.companyName)).size}
+                      {new Set(leads.map(l => l.companyName || l.company)).size}
                     </div>
                     <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>Unique Companies</div>
                   </div>
@@ -490,7 +491,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
                             {lead.name}
                           </td>
                           <td style={{ padding: '0.85rem 1rem', color: '#334155' }}>
-                            {lead.companyName}
+                            {lead.companyName || lead.company || '—'}
                           </td>
                           <td style={{ padding: '0.85rem 1rem' }}>
                             <span style={{ background: 'rgba(29, 107, 243, 0.08)', color: '#1d6bf3', padding: '0.25rem 0.6rem', borderRadius: '0.375rem', fontWeight: 600, fontSize: '0.8rem' }}>
@@ -498,7 +499,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
                             </span>
                           </td>
                           <td style={{ padding: '0.85rem 1rem', color: '#475569' }}>
-                            {lead.numberOfCandidates}
+                            {lead.numberOfCandidates || lead.candidates || '—'}
                           </td>
                           <td style={{ padding: '0.85rem 1rem', color: '#64748b' }}>
                             {lead.location}
@@ -582,16 +583,16 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
                         <Phone size={16} color="#1d6bf3" /> <strong>Phone:</strong> {selectedLead.phone}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Building size={16} color="#1d6bf3" /> <strong>Company:</strong> {selectedLead.companyName}
+                        <Building size={16} color="#1d6bf3" /> <strong>Company:</strong> {selectedLead.companyName || selectedLead.company}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <CheckCircle2 size={16} color="#1d6bf3" /> <strong>Domain:</strong> {selectedLead.domain}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Users size={16} color="#1d6bf3" /> <strong>Candidates Count:</strong> {selectedLead.numberOfCandidates}
+                        <Users size={16} color="#1d6bf3" /> <strong>Candidates Count:</strong> {selectedLead.numberOfCandidates || selectedLead.candidates}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <MapPin size={16} color="#1d6bf3" /> <strong>Mode of Delivery:</strong> {selectedLead.modeOfDelivery}
+                        <MapPin size={16} color="#1d6bf3" /> <strong>Mode of Delivery:</strong> {selectedLead.modeOfDelivery || selectedLead.deliveryMode}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <MapPin size={16} color="#1d6bf3" /> <strong>Location:</strong> {selectedLead.location}
